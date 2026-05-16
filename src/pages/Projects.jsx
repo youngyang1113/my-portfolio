@@ -84,8 +84,8 @@ const Projects = () => {
               我的项目
             </span>
           </h1>
-          <p className="text-xl text-gray-400">
-            探索我创造的数字世界
+          <p className="text-lg text-gray-400 md:text-xl">
+            按类别浏览，或搜索关键词。
           </p>
         </motion.div>
 
@@ -151,7 +151,7 @@ const Projects = () => {
                     
                     <div className="p-6">
                       <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-                      <p className="text-gray-400 mb-4">{project.description}</p>
+                      <p className="mb-4 text-base leading-relaxed text-gray-400">{project.description}</p>
                       
                       <div className="flex flex-wrap gap-2 mb-4">
                         {project.technologies.map(tech => (

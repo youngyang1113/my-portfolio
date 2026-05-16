@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import Navbar from './components/Navbar'
+import DynamicGradientBackground from './components/DynamicGradientBackground'
 import ParticleBackground from './components/ParticleBackground'
 import LoadingScreen from './components/LoadingScreen'
 import Home from './pages/Home'
 import Projects from './pages/Projects'
 import About from './pages/About'
 import Contact from './pages/Contact'
+import Message from './pages/Message'
 import './App.css'
 
 export default function App() {
@@ -20,8 +22,7 @@ export default function App() {
 
   return (
     <div className="app">
-      <div className="bg-grid" aria-hidden />
-      <div className="bg-glow" aria-hidden />
+      <DynamicGradientBackground />
       <ParticleBackground />
       <AnimatePresence mode="wait">
         {loading ? (
@@ -41,6 +42,7 @@ export default function App() {
                 <Route path="/projects" element={<Projects />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/message" element={<Message />} />
               </Routes>
             </main>
           </motion.div>

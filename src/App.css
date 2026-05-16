@@ -6,13 +6,13 @@
 
 .app-inner {
   position: relative;
-  z-index: 1;
+  z-index: 10;
   min-height: 100vh;
 }
 
 .main-content {
   position: relative;
-  z-index: 1;
+  z-index: 10;
   padding-top: 5rem;
 }
 
@@ -20,27 +20,4 @@
   .main-content {
     padding-top: 5.5rem;
   }
-}
-
-.bg-grid {
-  pointer-events: none;
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 64px 64px;
-  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 20%, transparent 75%);
-}
-
-.bg-glow {
-  pointer-events: none;
-  position: fixed;
-  inset: -20% -10% auto -10%;
-  z-index: 0;
-  height: min(70vh, 520px);
-  background: radial-gradient(ellipse at 50% 0%, rgba(108, 99, 255, 0.22), transparent 65%),
-    radial-gradient(ellipse at 80% 20%, rgba(255, 107, 107, 0.12), transparent 50%);
-  filter: blur(2px);
 }

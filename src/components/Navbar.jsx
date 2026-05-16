@@ -38,7 +38,7 @@ const Navbar = () => {
         <div className="flex h-18 items-center justify-between py-4 md:h-20">
           <Link to="/" className="text-2xl font-bold">
             <span className="bg-gradient-to-r from-primary via-white to-secondary bg-clip-text text-transparent">
-              Portfolio
+              Rye Young
             </span>
           </Link>
 
@@ -49,7 +49,7 @@ const Navbar = () => {
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={`relative flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                  className={`relative flex items-center gap-2 rounded-full px-4 py-2 text-base font-medium transition-colors ${
                     active ? 'text-white' : 'text-gray-400 hover:text-white'
                   }`}
                 >
@@ -91,7 +91,7 @@ const Navbar = () => {
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={`flex items-center gap-3 rounded-xl px-4 py-3 transition-colors ${
+                  className={`flex items-center gap-3 rounded-xl px-4 py-3 text-base transition-colors ${
                     active ? 'bg-primary/20 text-primary' : 'text-gray-300 hover:bg-white/5'
                   }`}
                 >

@@ -58,9 +58,9 @@ const Home = () => {
               sequence={[
                 'Rye Young',
                 2000,
-                '全栈开发者',
+                'Web 开发者',
                 2000,
-                '开源贡献者',
+                '前端与数据可视化',
                 2000,
               ]}
               wrapper="span"
@@ -70,8 +70,8 @@ const Home = () => {
             />
           </h1>
 
-          <p className="hero-element text-xl md:text-2xl text-gray-400 mb-8 max-w-2xl mx-auto">
-            热爱创造优雅的数字体验，专注于构建高性能的Web应用
+          <p className="hero-element text-lg md:text-xl text-gray-400 mb-8 max-w-2xl mx-auto leading-relaxed">
+            做可读、可用的界面，把数据和交互讲清楚。
           </p>
 
           <div className="hero-element flex items-center justify-center space-x-4 mb-12">
@@ -126,7 +126,7 @@ const Home = () => {
       <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
-            <h2 className="text-4xl font-bold text-center mb-12">
+            <h2 className="text-3xl font-bold text-center mb-12 md:text-4xl">
               技术栈
             </h2>
           </ScrollReveal>
@@ -139,7 +139,7 @@ const Home = () => {
                   whileHover={{ scale: 1.05, rotate: [-1, 1, -1, 0] }}
                 >
                   <FaCode className="mx-auto mb-3 text-primary" size={24} />
-                  <h3 className="font-semibold">{skill}</h3>
+                  <h3 className="text-base font-semibold md:text-lg">{skill}</h3>
                 </motion.div>
               </ScrollReveal>
             ))}
@@ -151,7 +151,7 @@ const Home = () => {
       <section className="py-20 px-4 bg-gradient-to-b from-transparent via-primary/5 to-transparent">
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
-            <h2 className="text-4xl font-bold text-center mb-12">
+            <h2 className="text-3xl font-bold text-center mb-12 md:text-4xl">
               精选项目
             </h2>
           </ScrollReveal>
@@ -168,8 +168,8 @@ const Home = () => {
                   </div>
                   <div className="p-6">
                     <h3 className="text-xl font-bold mb-2">项目 {item}</h3>
-                    <p className="text-gray-400 mb-4">
-                      一个令人惊叹的项目描述，展示技术能力和创新思维
+                    <p className="mb-4 text-base leading-relaxed text-gray-400">
+                      占位卡片，后续替换为真实项目简介。
                     </p>
                     <div className="flex flex-wrap gap-2">
                       {['React', 'Node.js', 'MongoDB'].map(tech => (
