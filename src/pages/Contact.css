@@ -53,12 +53,6 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.guestbook-panel__giscus {
+.guestbook-panel__comments {
   position: relative;
-}
-
-/* Giscus iframe 与站点深色背景协调 */
-.guestbook-panel__giscus :global(iframe.giscus-frame) {
-  width: 100%;
-  color-scheme: dark;
 }

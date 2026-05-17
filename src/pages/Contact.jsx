@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
-import { FaGithub, FaEnvelope, FaLinkedin } from 'react-icons/fa'
+import { FaGithub, FaEnvelope, FaInstagram } from 'react-icons/fa'
 import ScrollReveal from '../components/ScrollReveal'
-import GiscusComments from '../components/GiscusComments'
+import GuestbookComments from '../components/GuestbookComments'
 import './Contact.css'
 
 const ease = [0.22, 1, 0.36, 1]
@@ -20,10 +20,10 @@ const channels = [
     href: 'https://github.com/youngyang1113',
   },
   {
-    icon: FaLinkedin,
-    label: 'LinkedIn',
+    icon: FaInstagram,
+    label: 'Instagram',
     value: 'Profile',
-    href: 'https://linkedin.com',
+    href: 'https://www.instagram.com/rye_yb',
   },
 ]
 
@@ -72,7 +72,7 @@ export default function Contact() {
           </div>
         </ScrollReveal>
 
-        {/* 留言区：渐变高亮面板 + Giscus */}
+        {/* 留言区：渐变高亮面板 */}
         <ScrollReveal>
           <section
             className="guestbook-panel"
@@ -92,26 +92,20 @@ export default function Contact() {
                   写下你的留言
                 </h2>
                 <p className="mt-1 text-sm text-gray-400">
-                  使用 GitHub 账号登录后即可发表；所有人可见，提交后自动更新列表。
+                  填写昵称与内容即可发表，无需登录；所有人可见，提交后自动更新列表。
                 </p>
               </div>
 
-              <GiscusComments className="guestbook-panel__giscus" />
+              <GuestbookComments className="guestbook-panel__comments" />
             </motion.div>
           </section>
         </ScrollReveal>
 
         <p className="mt-8 text-center text-xs text-gray-500">
-          静态站点由{' '}
-          <a
-            href="https://giscus.app/zh-CN"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sky-400/80 underline-offset-2 hover:text-sky-300 hover:underline"
-          >
-            Giscus
-          </a>{' '}
-          提供留言存储（GitHub Discussions）
+          留言由自建 API 存储，部署说明见{' '}
+          <code className="rounded bg-white/5 px-1 py-0.5 text-gray-400">
+            examples/guestbook-server
+          </code>
         </p>
       </div>
     </div>

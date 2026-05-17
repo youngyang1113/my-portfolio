@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { TypeAnimation } from 'react-type-animation'
-import { FaGithub, FaLinkedin, FaArrowRight, FaCode } from 'react-icons/fa'
+import { FaGithub, FaInstagram, FaArrowRight, FaCode } from 'react-icons/fa'
 import ScrollReveal from '../components/ScrollReveal'
 import gsap from 'gsap'
 
@@ -100,12 +100,13 @@ const Home = () => {
               <FaGithub size={24} />
             </a>
             <a
-              href="https://linkedin.com"
+              href="https://www.instagram.com/rye_yb"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Instagram"
               className="text-gray-400 hover:text-white transition-colors transform hover:scale-110"
             >
-              <FaLinkedin size={24} />
+              <FaInstagram size={24} />
             </a>
           </div>
         </div>

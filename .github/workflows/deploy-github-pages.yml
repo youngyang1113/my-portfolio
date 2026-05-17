@@ -41,9 +41,10 @@ jobs:
           cache: npm
 
       - run: npm ci
-      - name: 构建（注入 Giscus 环境变量）
+      - name: 构建（注入环境变量）
         run: npm run build
         env:
+          VITE_GUESTBOOK_API_URL: ${{ secrets.VITE_GUESTBOOK_API_URL }}
           VITE_GISCUS_REPO: ${{ secrets.VITE_GISCUS_REPO }}
           VITE_GISCUS_REPO_ID: ${{ secrets.VITE_GISCUS_REPO_ID }}
           VITE_GISCUS_CATEGORY: ${{ secrets.VITE_GISCUS_CATEGORY }}
