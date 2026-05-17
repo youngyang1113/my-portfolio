@@ -1,0 +1,23 @@
+.app {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.app-inner {
+  position: relative;
+  z-index: 10;
+  min-height: 100vh;
+}
+
+.main-content {
+  position: relative;
+  z-index: 10;
+  padding-top: 5rem;
+}
+
+@media (min-width: 768px) {
+  .main-content {
+    padding-top: 5.5rem;
+  }
+}

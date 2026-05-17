@@ -1,0 +1,73 @@
+# 推送到 main / master 时构建并部署到 GitHub Pages
+# 仓库 Settings → Pages → Build and deployment → Source 选择「GitHub Actions」
+
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 计算 GitHub Pages 子路径（Vite base）
+        run: |
+          REPO="${GITHUB_REPOSITORY#*/}"
+          OWNER="${GITHUB_REPOSITORY%%/*}"
+          if [ "$REPO" = "$OWNER.github.io" ]; then
+            echo "GITHUB_PAGES_BASE=/" >> "$GITHUB_ENV"
+            echo "站点根路径: / (用户名.github.io 仓库)"
+          else
+            echo "GITHUB_PAGES_BASE=/$REPO/" >> "$GITHUB_ENV"
+            echo "站点子路径: /$REPO/ (普通仓库)"
+          fi
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - run: npm ci
+      - name: 构建（注入 Giscus 环境变量）
+        run: npm run build
+        env:
+          VITE_GISCUS_REPO: ${{ secrets.VITE_GISCUS_REPO }}
+          VITE_GISCUS_REPO_ID: ${{ secrets.VITE_GISCUS_REPO_ID }}
+          VITE_GISCUS_CATEGORY: ${{ secrets.VITE_GISCUS_CATEGORY }}
+          VITE_GISCUS_CATEGORY_ID: ${{ secrets.VITE_GISCUS_CATEGORY_ID }}
+          VITE_GISCUS_MAPPING: ${{ secrets.VITE_GISCUS_MAPPING }}
+          VITE_GISCUS_LANG: ${{ secrets.VITE_GISCUS_LANG }}
+          VITE_GISCUS_THEME: ${{ secrets.VITE_GISCUS_THEME }}
+          VITE_GISCUS_INPUT_POSITION: ${{ secrets.VITE_GISCUS_INPUT_POSITION }}
+          VITE_GISCUS_REACTIONS: ${{ secrets.VITE_GISCUS_REACTIONS }}
+
+      # 子路径 SPA：直接刷新 /about 等路由时由 404.html 回退到 index
+      - name: SPA 404 回退
+        run: cp dist/index.html dist/404.html
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4

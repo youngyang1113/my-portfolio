@@ -1,0 +1,64 @@
+/* 留言板高亮区域：淡色渐变 + 玻璃质感，突出评论区 */
+
+.contact-page {
+  position: relative;
+}
+
+.guestbook-panel {
+  position: relative;
+  margin-top: 0.5rem;
+}
+
+.guestbook-panel__inner {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.09) 0%,
+    rgba(148, 163, 184, 0.06) 40%,
+    rgba(56, 189, 248, 0.08) 100%
+  );
+  padding: 1.5rem 1.25rem 1.75rem;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+    0 24px 48px -24px rgba(0, 0, 0, 0.55),
+    0 0 80px -40px rgba(56, 189, 248, 0.25);
+  backdrop-filter: blur(16px);
+}
+
+@media (min-width: 768px) {
+  .guestbook-panel__inner {
+    padding: 2rem 1.75rem 2.25rem;
+  }
+}
+
+.guestbook-panel__glow {
+  pointer-events: none;
+  position: absolute;
+  inset: -40% -20% auto;
+  height: 60%;
+  background: radial-gradient(
+    ellipse 80% 60% at 50% 0%,
+    rgba(56, 189, 248, 0.2),
+    transparent 70%
+  );
+}
+
+.guestbook-panel__header {
+  position: relative;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.guestbook-panel__giscus {
+  position: relative;
+}
+
+/* Giscus iframe 与站点深色背景协调 */
+.guestbook-panel__giscus :global(iframe.giscus-frame) {
+  width: 100%;
+  color-scheme: dark;
+}
