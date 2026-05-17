@@ -1,8 +1,12 @@
 const env = import.meta.env
 
-/** 留言 API 根地址；留空则使用同源 /api/comments（本地 dev 可配合 vite proxy） */
+/** 生产环境默认 API（Render）；本地 dev 留空走 Vite proxy */
+const PRODUCTION_API_BASE = 'https://my-portfolio-ns9n.onrender.com'
+
 export const guestbookConfig = {
-  apiBase: String(env.VITE_GUESTBOOK_API_URL || '').replace(/\/$/, ''),
+  apiBase: String(
+    env.VITE_GUESTBOOK_API_URL || (import.meta.env.PROD ? PRODUCTION_API_BASE : ''),
+  ).replace(/\/$/, ''),
 }
 
 export function getGuestbookApiUrl(path = '/api/comments') {
