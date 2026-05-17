@@ -68,24 +68,6 @@ export default function GuestbookComments({ className = '' }) {
     }
   }
 
-  if (!apiReady) {
-    return (
-      <div
-        className={`rounded-xl border border-amber-500/30 bg-amber-500/10 p-6 text-sm leading-relaxed text-amber-100/90 ${className}`}
-        role="status"
-      >
-        <p className="font-medium text-amber-50">留言 API 尚未配置</p>
-        <p className="mt-2 text-amber-100/80">
-          请在 <code className="rounded bg-black/30 px-1.5 py-0.5">.env</code> 中设置{' '}
-          <code className="rounded bg-black/30 px-1.5 py-0.5">VITE_GUESTBOOK_API_URL</code>
-          （指向已部署的留言服务）。本地开发可运行{' '}
-          <code className="rounded bg-black/30 px-1.5 py-0.5">examples/guestbook-server</code> 并配合
-          Vite 代理。
-        </p>
-      </div>
-    )
-  }
-
   return (
     <div className={className}>
       <form onSubmit={handleSubmit} className="space-y-4">
