@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import App from './App.jsx'
 import './index.css'
 
-let basename = import.meta.env.BASE || '/'
+let basename = import.meta.env.BASE_URL || '/'
 if (basename.endsWith('/')) basename = basename.slice(0, -1) || '/'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
