@@ -108,7 +108,7 @@ export function isGitHubStorageEnabled() {
   return Boolean(getConfig())
 }
 
-/** 追加一条留言；409 冲突时重试一次 */
+/** 追加一条留言；冲突时重试一次 */
 export async function appendMessageToGitHub(entry) {
   const commitMessage = `guestbook: message from ${entry.name}`
 

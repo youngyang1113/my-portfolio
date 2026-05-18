@@ -102,7 +102,7 @@ export default function Contact() {
         </ScrollReveal>
 
         <p className="mt-8 text-center text-xs text-gray-500">
-          留言经 Render API 写入 GitHub 仓库{' '}
+          留言将写入 GitHub 仓库{' '}
           <code className="rounded bg-white/5 px-1 py-0.5 text-gray-400">data/messages.json</code>{' '}
           永久保存
         </p>

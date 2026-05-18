@@ -34,10 +34,13 @@ function validateEntry(body) {
 }
 
 app.get('/api/health', (_req, res) => {
-  res.json({ ok: true, storage: getStorageMode() })
+  res.json({
+    ok: true,
+    storage: getStorageMode(),
+  })
 })
 
-/** GET /api/comments — 最新在前（GitHub data/messages.json 或本地文件） */
+/** GET /api/comments — 最新在前（数据来自 GitHub data/messages.json 或本地文件） */
 app.get('/api/comments', async (_req, res) => {
   try {
     const list = await readMessages()
@@ -49,7 +52,7 @@ app.get('/api/comments', async (_req, res) => {
   }
 })
 
-/** POST /api/comments — 调用 GitHub API 追加写入 messages.json */
+/** POST /api/comments — 写入 GitHub 仓库 messages.json */
 app.post('/api/comments', async (req, res) => {
   const validated = validateEntry(req.body)
   if (validated.error) {
