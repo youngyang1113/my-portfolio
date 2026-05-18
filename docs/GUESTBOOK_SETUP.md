@@ -106,15 +106,13 @@ Vite 在**构建时**把 `VITE_*` 写入静态文件，需在仓库配置 Secret
 
 ---
 
-## 七、自建 Node.js 后端（可选）
+## 七、Render + GitHub 持久化留言（当前方案）
 
-若需要「昵称 + 内容」、无需 GitHub 登录，见：
+流程：**用户提交 → Render API → GitHub Contents API → 追加 `data/messages.json`**
 
-```
-examples/guestbook-server/
-```
+配置与部署见 `examples/guestbook-server/README.md`。Render 需设置 `GITHUB_TOKEN`（PAT，**repo** 权限）及 `GITHUB_REPO` 等变量。
 
-需单独部署到 Render / Railway / VPS 等（**不能**只放在 GitHub Pages）。前端通过 `fetch` 调用 API，JSON 文件或数据库持久化。
+访问 `https://my-portfolio-ns9n.onrender.com/api/health` 应返回 `"storage": "github"`。
 
 ---
 

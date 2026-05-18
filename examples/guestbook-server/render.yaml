@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: my-portfolio-guestbook
+    runtime: node
+    rootDir: examples/guestbook-server
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: GITHUB_REPO
+        value: youngyang1113/my-portfolio
+      - key: GITHUB_BRANCH
+        value: master
+      - key: GITHUB_MESSAGES_PATH
+        value: data/messages.json
+      - key: GITHUB_TOKEN
+        sync: false
