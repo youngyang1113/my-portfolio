@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { TypeAnimation } from 'react-type-animation'
-import { FaGithub, FaLinkedin, FaArrowRight, FaCode } from 'react-icons/fa'
+import { FaGithub, FaLinkedin, FaArrowRight, FaCode, FaWeixin } from 'react-icons/fa'
 import ScrollReveal from '../components/ScrollReveal'
 import gsap from 'gsap'
 
@@ -92,7 +92,7 @@ const Home = () => {
 
           <div className="hero-element flex items-center justify-center space-x-6">
             <a
-              href="https://github.com"
+              href="https://github.com/youngyang1113"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-white transition-colors transform hover:scale-110"
@@ -107,6 +107,13 @@ const Home = () => {
             >
               <FaLinkedin size={24} />
             </a>
+            <span
+              className="text-gray-400 hover:text-green-400 transition-colors transform hover:scale-110 cursor-default flex items-center space-x-1"
+              title="微信号: yb1113y"
+            >
+              <FaWeixin size={24} />
+              <span className="text-sm">yb1113y</span>
+            </span>
           </div>
         </div>
 
@@ -157,22 +164,22 @@ const Home = () => {
           </ScrollReveal>
           
           <div className="grid md:grid-cols-2 gap-8 mb-12">
-            {[1, 2].map((item) => (
-              <ScrollReveal key={item}>
+            <ScrollReveal>
+              <a href="https://github.com/youngyang1113/official-live-page" target="_blank" rel="noopener noreferrer">
                 <motion.div
                   className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden group cursor-pointer"
                   whileHover={{ scale: 1.02 }}
                 >
                   <div className="h-48 bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
-                    <span className="text-4xl">🚀</span>
+                    <span className="text-4xl">🎬</span>
                   </div>
                   <div className="p-6">
-                    <h3 className="text-xl font-bold mb-2">项目 {item}</h3>
+                    <h3 className="text-xl font-bold mb-2">Official Live Page</h3>
                     <p className="mb-4 text-base leading-relaxed text-gray-400">
-                      占位卡片，后续替换为真实项目简介。
+                      基于 React + Vite 构建的官方直播页面，支持响应式布局与流畅交互体验。
                     </p>
                     <div className="flex flex-wrap gap-2">
-                      {['React', 'Node.js', 'MongoDB'].map(tech => (
+                      {['React', 'Vite', 'JavaScript'].map(tech => (
                         <span key={tech} className="px-3 py-1 bg-primary/20 rounded-full text-sm">
                           {tech}
                         </span>
@@ -180,8 +187,33 @@ const Home = () => {
                     </div>
                   </div>
                 </motion.div>
-              </ScrollReveal>
-            ))}
+              </a>
+            </ScrollReveal>
+            <ScrollReveal>
+              <a href="https://github.com/youngyang1113/easy-lab" target="_blank" rel="noopener noreferrer">
+                <motion.div
+                  className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden group cursor-pointer"
+                  whileHover={{ scale: 1.02 }}
+                >
+                  <div className="h-48 bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
+                    <span className="text-4xl">🧪</span>
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold mb-2">AI 化学虚拟实验室</h3>
+                    <p className="mb-4 text-base leading-relaxed text-gray-400">
+                      智能化学实验模拟平台，支持拖拽试剂、实时反应动画与教师控制台。
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {['HTML', 'CSS', 'JavaScript', 'AI'].map(tech => (
+                        <span key={tech} className="px-3 py-1 bg-primary/20 rounded-full text-sm">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              </a>
+            </ScrollReveal>
           </div>
           
           <div className="text-center">

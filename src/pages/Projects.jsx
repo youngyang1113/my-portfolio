@@ -10,56 +10,32 @@ const Projects = () => {
   const projects = [
     {
       id: 1,
-      title: '电商平台',
-      description: '基于微服务架构的下一代电商解决方案，支持高并发、实时数据处理',
-      image: '🛒',
-      category: 'fullstack',
-      technologies: ['React', 'Node.js', 'MongoDB', 'Docker'],
-      github: 'https://github.com',
-      demo: 'https://demo.com',
+      title: 'Official Live Page',
+      description: '基于 React + Vite 构建的官方直播页面，支持响应式布局与流畅交互体验',
+      image: '🎬',
+      category: 'frontend',
+      technologies: ['React', 'Vite', 'JavaScript', 'CSS'],
+      github: 'https://github.com/youngyang1113/official-live-page',
+      demo: 'https://youngyang1113.github.io/official-live-page/',
       featured: true
     },
     {
       id: 2,
-      title: 'AI 聊天应用',
-      description: '集成 GPT 模型的智能对话系统，提供个性化用户体验',
-      image: '🤖',
+      title: 'AI 化学虚拟实验室',
+      description: '智能化学实验模拟平台，支持拖拽试剂到反应池、实时反应动画（气泡/沉淀）、教师控制台记录与任务模式',
+      image: '🧪',
       category: 'ai',
-      technologies: ['Python', 'TensorFlow', 'React', 'WebSocket'],
-      github: 'https://github.com',
-      demo: 'https://demo.com',
+      technologies: ['HTML', 'CSS', 'JavaScript', 'AI'],
+      github: 'https://github.com/youngyang1113/easy-lab',
+      demo: 'https://youngyang1113.github.io/easy-lab/',
       featured: true
-    },
-    {
-      id: 3,
-      title: '数据可视化仪表盘',
-      description: '实时监控和分析平台，提供直观的数据展示和报表功能',
-      image: '📊',
-      category: 'frontend',
-      technologies: ['Vue.js', 'D3.js', 'Express', 'PostgreSQL'],
-      github: 'https://github.com',
-      demo: 'https://demo.com',
-      featured: false
-    },
-    {
-      id: 4,
-      title: '移动端社交应用',
-      description: '跨平台移动社交应用，支持即时通讯、动态分享等功能',
-      image: '📱',
-      category: 'mobile',
-      technologies: ['React Native', 'Firebase', 'Node.js'],
-      github: 'https://github.com',
-      demo: 'https://demo.com',
-      featured: false
     }
   ]
 
   const categories = [
     { key: 'all', label: '全部' },
-    { key: 'fullstack', label: '全栈' },
     { key: 'frontend', label: '前端' },
-    { key: 'ai', label: 'AI' },
-    { key: 'mobile', label: '移动端' }
+    { key: 'ai', label: 'AI' }
   ]
 
   const filteredProjects = projects.filter(project => {
