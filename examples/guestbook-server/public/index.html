@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>留言板 API 示例</title>
+  <style>
+    :root {
+      --bg: #0f1419;
+      --card: #1a2332;
+      --border: #2d3a4f;
+      --text: #e7ecf3;
+      --muted: #8b9cb3;
+      --accent: #3b82f6;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, sans-serif;
+      background: linear-gradient(160deg, #0f1419, #1a2744);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+    .wrap { max-width: 640px; margin: 0 auto; }
+    h1 { font-size: 1.75rem; margin-bottom: 0.5rem; }
+    .sub { color: var(--muted); margin-bottom: 2rem; font-size: 0.95rem; }
+    .panel {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    label { display: block; font-size: 0.85rem; color: var(--muted); margin-bottom: 0.35rem; }
+    input, textarea {
+      width: 100%;
+      background: #0f1419;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      padding: 0.65rem 0.75rem;
+      margin-bottom: 1rem;
+      font: inherit;
+    }
+    textarea { min-height: 100px; resize: vertical; }
+    button {
+      width: 100%;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    button:disabled { opacity: 0.6; cursor: not-allowed; }
+    .list-title { font-size: 1rem; margin-bottom: 1rem; color: var(--muted); }
+    .comment {
+      border-top: 1px solid var(--border);
+      padding: 1rem 0;
+    }
+    .comment:first-child { border-top: none; padding-top: 0; }
+    .comment .name { font-weight: 600; }
+    .comment .time { font-size: 0.75rem; color: var(--muted); margin-left: 0.5rem; }
+    .comment .body { margin-top: 0.5rem; line-height: 1.55; white-space: pre-wrap; }
+    .error { color: #f87171; font-size: 0.875rem; margin-top: 0.5rem; }
+    .empty { color: var(--muted); text-align: center; padding: 2rem; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>留言板</h1>
+    <p class="sub">Contact &amp; Comments · 自建 API 示例（昵称 + 内容，无需 GitHub 登录）</p>
+
+    <form class="panel" id="form">
+      <label for="name">昵称 *</label>
+      <input id="name" name="name" required maxlength="40" placeholder="你的名字" />
+
+      <label for="message">留言 *</label>
+      <textarea id="message" name="message" required maxlength="2000" placeholder="写下你的想法…"></textarea>
+
+      <button type="submit" id="submit">发送留言</button>
+      <p class="error" id="error" hidden></p>
+    </form>
+
+    <section class="panel">
+      <h2 class="list-title">全部留言（最新在上）</h2>
+      <div id="list"></div>
+    </section>
+  </div>
+
+  <script>
+    const API = '' // 同源；若前后端分离，改为 'https://your-api.onrender.com'
+
+    const form = document.getElementById('form')
+    const listEl = document.getElementById('list')
+    const errorEl = document.getElementById('error')
+    const submitBtn = document.getElementById('submit')
+
+    function formatTime(iso) {
+      try {
+        return new Date(iso).toLocaleString('zh-CN', { dateStyle: 'medium', timeStyle: 'short' })
+      } catch {
+        return iso
+      }
+    }
+
+    function renderList(items) {
+      if (!items.length) {
+        listEl.innerHTML = '<p class="empty">还没有留言，来做第一个吧。</p>'
+        return
+      }
+      listEl.innerHTML = items
+        .map(
+          (c) => `
+        <article class="comment">
+          <div>
+            <span class="name">${escapeHtml(c.name)}</span>
+            <span class="time">${formatTime(c.createdAt)}</span>
+          </div>
+          <p class="body">${escapeHtml(c.message)}</p>
+        </article>`
+        )
+        .join('')
+    }
+
+    function escapeHtml(s) {
+      const d = document.createElement('div')
+      d.textContent = s
+      return d.innerHTML
+    }
+
+    async function loadComments() {
+      const res = await fetch(`${API}/api/comments`)
+      const data = await res.json()
+      renderList(data)
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault()
+      errorEl.hidden = true
+      submitBtn.disabled = true
+
+      try {
+        const body = {
+          name: form.name.value.trim(),
+          message: form.message.value.trim(),
+        }
+        const res = await fetch(`${API}/api/comments`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+        })
+        const data = await res.json()
+        if (!res.ok) throw new Error(data.error || '提交失败')
+
+        form.message.value = ''
+        await loadComments()
+      } catch (err) {
+        errorEl.textContent = err.message
+        errorEl.hidden = false
+      } finally {
+        submitBtn.disabled = false
+      }
+    })
+
+    loadComments()
+  </script>
+</body>
+</html>
