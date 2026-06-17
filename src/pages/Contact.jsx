@@ -61,6 +61,7 @@ export default function Contact() {
                   href={c.href}
                   target={c.href.startsWith('http') ? '_blank' : undefined}
                   rel={c.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  aria-label={`${c.label}: ${c.value}`}
                   className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-gray-300 transition-colors hover:border-sky-500/40 hover:text-white"
                 >
                   <Icon className="text-sky-400/90" aria-hidden />

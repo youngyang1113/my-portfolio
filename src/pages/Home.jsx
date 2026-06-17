@@ -95,6 +95,7 @@ const Home = () => {
               href="https://github.com/youngyang1113"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="GitHub 个人主页"
               className="text-gray-400 hover:text-white transition-colors transform hover:scale-110"
             >
               <FaGithub size={24} />
