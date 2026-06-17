@@ -1,4 +1,8 @@
-import { AboutHero, IntroSection, SkillCards, Timeline, VisionSection } from './About'
+import AboutHero from './About/AboutHero'
+import IntroSection from './About/IntroSection'
+import SkillCards from './About/SkillCards'
+import Timeline from './About/Timeline'
+import VisionSection from './About/VisionSection'
 
 export default function About() {
   return (
