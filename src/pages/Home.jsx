@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { TypeAnimation } from 'react-type-animation'
-import { FaGithub, FaLinkedin, FaArrowRight, FaCode, FaWeixin } from 'react-icons/fa'
+import { FaGithub, FaArrowRight, FaCode, FaWeixin } from 'react-icons/fa'
 import ScrollReveal from '../components/ScrollReveal'
 import gsap from 'gsap'
 
@@ -98,14 +98,6 @@ const Home = () => {
               className="text-gray-400 hover:text-white transition-colors transform hover:scale-110"
             >
               <FaGithub size={24} />
-            </a>
-            <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-white transition-colors transform hover:scale-110"
-            >
-              <FaLinkedin size={24} />
             </a>
             <span
               className="text-gray-400 hover:text-green-400 transition-colors transform hover:scale-110 cursor-default flex items-center space-x-1"
