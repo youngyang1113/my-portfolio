@@ -1,0 +1,5 @@
+export { default as AboutHero } from './AboutHero'
+export { default as IntroSection } from './IntroSection'
+export { default as SkillCards } from './SkillCards'
+export { default as Timeline } from './Timeline'
+export { default as VisionSection } from './VisionSection'
