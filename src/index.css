@@ -15,3 +15,60 @@
     @apply bg-primary/40 text-white;
   }
 }
+
+/* Hero 点阵网格 */
+.hero-grid {
+  background-image: radial-gradient(circle, rgba(108, 99, 255, 0.15) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* 慢速旋转动画 */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+/* 时间线节点脉冲动画 */
+@keyframes timeline-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+.animate-timeline-pulse {
+  animation: timeline-pulse 2.5s ease-in-out infinite;
+}
+
+/* 项目截图浏览器框架 */
+.screenshot-frame {
+  position: relative;
+}
+.screenshot-frame::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  z-index: 5;
+  border-radius: 12px 12px 0 0;
+}
+.screenshot-frame::after {
+  content: '● ● ●';
+  position: absolute;
+  top: 7px;
+  left: 14px;
+  font-size: 9px;
+  letter-spacing: 5px;
+  color: rgba(255, 255, 255, 0.2);
+  z-index: 6;
+}

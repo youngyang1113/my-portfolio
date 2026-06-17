@@ -1,33 +1,36 @@
-import { motion } from 'framer-motion'
-import { FaGithub, FaEnvelope, FaInstagram } from 'react-icons/fa'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { FaGithub, FaEnvelope, FaWeixin } from 'react-icons/fa'
 import ScrollReveal from '../components/ScrollReveal'
 import GuestbookComments from '../components/GuestbookComments'
 import './Contact.css'
 
 const ease = [0.22, 1, 0.36, 1]
 
-const channels = [
-  {
-    icon: FaEnvelope,
-    label: 'Email',
-    value: 'youngyb0109@gmail.com',
-    href: 'mailto:youngyb0109@gmail.com',
-  },
-  {
-    icon: FaGithub,
-    label: 'GitHub',
-    value: 'Rye',
-    href: 'https://github.com/youngyang1113',
-  },
-  {
-    icon: FaInstagram,
-    label: 'Instagram',
-    value: 'Profile',
-    href: 'https://www.instagram.com/rye_yb',
-  },
-]
-
 export default function Contact() {
+  const [showWechat, setShowWechat] = useState(false)
+
+  const channels = [
+    {
+      icon: FaEnvelope,
+      label: 'Email',
+      value: 'youngyb0109@gmail.com',
+      href: 'mailto:youngyb0109@gmail.com',
+    },
+    {
+      icon: FaGithub,
+      label: 'GitHub',
+      value: 'Rye',
+      href: 'https://github.com/youngyang1113',
+    },
+    {
+      icon: FaWeixin,
+      label: '微信',
+      value: 'yb1113y',
+      onClick: () => setShowWechat((prev) => !prev),
+    },
+  ]
+
   return (
     <div className="contact-page min-h-screen px-5 pb-32 pt-24 md:px-8 md:pt-28">
       <div className="mx-auto max-w-3xl">
@@ -55,7 +58,8 @@ export default function Contact() {
           <div className="flex flex-wrap justify-center gap-3">
             {channels.map((c) => {
               const Icon = c.icon
-              return (
+              const isLink = !!c.href
+              return isLink ? (
                 <a
                   key={c.label}
                   href={c.href}
@@ -68,9 +72,42 @@ export default function Contact() {
                   <span className="text-gray-500">{c.label}</span>
                   <span className="font-medium text-white/90">{c.value}</span>
                 </a>
+              ) : (
+                <button
+                  key={c.label}
+                  type="button"
+                  onClick={c.onClick}
+                  aria-label={`${c.label}: ${c.value}`}
+                  className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-gray-300 transition-colors hover:border-sky-500/40 hover:text-white"
+                >
+                  <Icon className="text-sky-400/90" aria-hidden />
+                  <span className="text-gray-500">{c.label}</span>
+                  <span className="font-medium text-white/90">{c.value}</span>
+                </button>
               )
             })}
           </div>
+
+          {/* 微信二维码弹窗 */}
+          <AnimatePresence>
+            {showWechat && (
+              <motion.div
+                initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                transition={{ duration: 0.25, ease }}
+                className="mx-auto mt-6 w-fit rounded-2xl border border-white/10 bg-white/[0.05] p-4 backdrop-blur-md"
+              >
+                <p className="mb-3 text-center text-sm text-gray-400">扫码添加微信</p>
+                <img
+                  src={`${import.meta.env.BASE_URL}wechatcode.jpg`}
+                  alt="微信二维码"
+                  className="mx-auto h-48 w-48 rounded-lg object-contain"
+                />
+                <p className="mt-3 text-center text-sm font-medium text-white">微信号：yb1113y</p>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </ScrollReveal>
 
         {/* 留言区：渐变高亮面板 */}

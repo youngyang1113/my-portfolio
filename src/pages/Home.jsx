@@ -32,20 +32,40 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center px-4">
+      <section className="relative h-screen flex items-center justify-center px-4 overflow-hidden">
+        {/* 背景层 */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-dark to-secondary/20" />
         
+        {/* 点阵网格背景 */}
+        <div className="absolute inset-0 hero-grid opacity-40" />
+
+        {/* 大面积光晕装饰 */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/[0.07] rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-secondary/[0.05] rounded-full blur-[100px] pointer-events-none" />
+
         <div ref={heroRef} className="text-center relative z-10 max-w-4xl mx-auto">
+          {/* 头像区域 */}
           <motion.div
-            className="hero-element mb-6"
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 0.5 }}
+            className="hero-element mb-8"
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-r from-primary to-secondary p-1">
-              <div className="w-full h-full rounded-full bg-dark flex items-center justify-center text-4xl">
-                👨‍💻
+            <div className="relative w-36 h-36 mx-auto">
+              {/* 外层旋转光环 */}
+              <div className="absolute inset-[-8px] rounded-full bg-gradient-to-r from-primary via-secondary to-primary animate-spin-slow opacity-60" />
+              {/* 头像主体 */}
+              <div className="relative w-full h-full rounded-full bg-gradient-to-br from-primary to-secondary p-[3px]">
+                <div className="w-full h-full rounded-full bg-dark flex items-center justify-center">
+                  {/* 替换下方 src 为你的照片 */}
+                  {/* <img src="/images/avatar.jpg" alt="Rye Young" className="w-full h-full rounded-full object-cover" /> */}
+                  <span className="text-4xl font-bold bg-gradient-to-br from-primary via-white to-secondary bg-clip-text text-transparent select-none">
+                    RY
+                  </span>
+                </div>
               </div>
+              {/* 底部发光 */}
+              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-24 h-6 bg-primary/30 rounded-full blur-xl" />
             </div>
           </motion.div>
 
@@ -116,8 +136,12 @@ const Home = () => {
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
-          <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-gray-400 rounded-full mt-2 animate-pulse" />
+          <div className="w-6 h-10 border-2 border-gray-400/50 rounded-full flex justify-center">
+            <motion.div
+              className="w-1 h-3 bg-gradient-to-b from-primary to-secondary rounded-full mt-2"
+              animate={{ y: [0, 12, 0], opacity: [1, 0.3, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
           </div>
         </motion.div>
       </section>
@@ -163,12 +187,13 @@ const Home = () => {
                   className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden group cursor-pointer"
                   whileHover={{ scale: 1.02 }}
                 >
-                  <div className="h-48 overflow-hidden">
+                  <div className="screenshot-frame h-48 overflow-hidden relative">
                     <img 
                       src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&h=600&fit=crop" 
                       alt="Official Live Page"
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-dark/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
                   <div className="p-6">
                     <h3 className="text-xl font-bold mb-2">Official Live Page</h3>
@@ -192,12 +217,13 @@ const Home = () => {
                   className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden group cursor-pointer"
                   whileHover={{ scale: 1.02 }}
                 >
-                  <div className="h-48 overflow-hidden">
+                  <div className="screenshot-frame h-48 overflow-hidden relative">
                     <img 
                       src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=800&h=600&fit=crop" 
                       alt="AI 化学虚拟实验室"
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-dark/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
                   <div className="p-6">
                     <h3 className="text-xl font-bold mb-2">AI 化学虚拟实验室</h3>

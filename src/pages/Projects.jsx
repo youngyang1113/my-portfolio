@@ -165,12 +165,14 @@ const Projects = () => {
                       </div>
                     )}
                     
-                    <div className="h-48 overflow-hidden">
+                    <div className="screenshot-frame h-48 overflow-hidden relative">
                       <img 
                         src={project.image} 
                         alt={project.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                       />
+                      {/* hover 渐变遮罩 */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-dark/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     </div>
                     
                     <div className="p-6">
