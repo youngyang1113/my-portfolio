@@ -1,12 +1,41 @@
-import { useCallback, useMemo } from 'react'
+import { useCallback, useMemo, useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import Particles from 'react-tsparticles'
 import { loadSlim } from 'tsparticles-slim'
 
-/** 叠在渐变之上，背景透明以透出底层。留言页（/message）开启窗口级点击排斥，形成「按动」粒子反馈。 */
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 768px)')
+    setIsMobile(mq.matches)
+    const handler = (e) => setIsMobile(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
+
+  return isMobile
+}
+
+function usePrefersReducedMotion() {
+  const [reduced, setReduced] = useState(false)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+    setReduced(mq.matches)
+    const handler = (e) => setReduced(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
+
+  return reduced
+}
+
 export default function ParticleBackground() {
   const { pathname } = useLocation()
   const messagePage = pathname === '/contact'
+  const isMobile = useIsMobile()
+  const prefersReducedMotion = usePrefersReducedMotion()
 
   const particlesInit = useCallback(async (engine) => {
     await loadSlim(engine)
@@ -19,12 +48,12 @@ export default function ParticleBackground() {
           value: 'transparent',
         },
       },
-      fpsLimit: 90,
+      fpsLimit: 60,
       interactivity: {
         detectsOn: 'window',
         events: {
           onClick: {
-            enable: messagePage,
+            enable: messagePage && !isMobile,
             mode: 'repulse',
           },
           onHover: {
@@ -61,7 +90,7 @@ export default function ParticleBackground() {
         },
         number: {
           density: { enable: true, area: 900 },
-          value: messagePage ? 72 : 64,
+          value: isMobile ? 24 : messagePage ? 72 : 64,
         },
         opacity: {
           value: { min: 0.12, max: messagePage ? 0.45 : 0.38 },
@@ -71,10 +100,14 @@ export default function ParticleBackground() {
           value: { min: 1, max: 3.2 },
         },
       },
-      detectRetina: true,
+      detectRetina: false,
     }),
-    [messagePage],
+    [messagePage, isMobile],
   )
+
+  if (prefersReducedMotion || isMobile) {
+    return null
+  }
 
   return (
     <Particles
