@@ -168,8 +168,15 @@ const Projects = () => {
               >
                 <ScrollReveal>
                   <motion.div
-                    className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden hover:border-primary/50 transition-all duration-300"
+                    className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden hover:border-primary/50 transition-all duration-300 cursor-pointer"
                     whileHover={{ y: -5 }}
+                    onClick={() => {
+                      if (project.demo) {
+                        window.open(project.demo, '_blank', 'noopener,noreferrer')
+                      } else if (project.github) {
+                        window.open(project.github, '_blank', 'noopener,noreferrer')
+                      }
+                    }}
                   >
                     {project.featured && (
                       <div className="absolute top-4 right-4 z-10 px-3 py-1 bg-gradient-to-r from-primary to-secondary rounded-full text-sm font-semibold">
@@ -185,6 +192,12 @@ const Projects = () => {
                       />
                       {/* hover 渐变遮罩 */}
                       <div className="absolute inset-0 bg-gradient-to-t from-dark/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      {/* 点击提示 */}
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span className="px-4 py-2 bg-black/60 rounded-full text-sm text-white backdrop-blur-sm">
+                          {project.demo ? '点击访问演示' : '点击访问仓库'}
+                        </span>
+                      </div>
                     </div>
                     
                     <div className="p-6">
@@ -207,20 +220,24 @@ const Projects = () => {
                           href={project.github}
                           target="_blank"
                           rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
                           className="flex items-center space-x-2 text-gray-400 hover:text-white transition-colors"
                         >
                           <FaGithub />
                           <span>源码</span>
                         </a>
-                        <a
-                          href={project.demo}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center space-x-2 text-gray-400 hover:text-primary transition-colors"
-                        >
-                          <FaExternalLinkAlt />
-                          <span>演示</span>
-                        </a>
+                        {project.demo && (
+                          <a
+                            href={project.demo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className="flex items-center space-x-2 text-gray-400 hover:text-primary transition-colors"
+                          >
+                            <FaExternalLinkAlt />
+                            <span>演示</span>
+                          </a>
+                        )}
                       </div>
                     </div>
                   </motion.div>
