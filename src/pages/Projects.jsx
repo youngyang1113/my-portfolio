@@ -26,12 +26,23 @@ const Projects = () => {
       image: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=800&h=600&fit=crop',
       category: 'ai',
       technologies: ['HTML', 'CSS', 'JavaScript', 'AI'],
-      github: 'https://github.com/youngyang1113/easy-lab',
-      demo: 'https://youngyang1113.github.io/easy-lab/',
+      github: 'https://github.com/youngyang1113/ChemistryLab',
+      demo: 'https://youngyang1113.github.io/ChemistryLab/',
       featured: true
     },
     {
       id: 3,
+      title: '家教辅导平台',
+      description: '在线家教匹配与辅导平台，支持师生匹配、课程管理、在线辅导等功能',
+      image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=600&fit=crop',
+      category: 'fullstack',
+      technologies: ['React', 'Node.js', 'MongoDB', 'Express'],
+      github: 'https://github.com/youngyang1113/tutor_platform',
+      demo: '',
+      featured: true
+    },
+    {
+      id: 4,
       title: '电商平台',
       description: '基于微服务架构的下一代电商解决方案，支持高并发、实时数据处理',
       image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop',
@@ -39,10 +50,10 @@ const Projects = () => {
       technologies: ['React', 'Node.js', 'MongoDB', 'Docker'],
       github: 'https://github.com',
       demo: 'https://demo.com',
-      featured: true
+      featured: false
     },
     {
-      id: 4,
+      id: 5,
       title: 'AI 聊天应用',
       description: '集成 GPT 模型的智能对话系统，提供个性化用户体验',
       image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=600&fit=crop',
@@ -50,10 +61,10 @@ const Projects = () => {
       technologies: ['Python', 'TensorFlow', 'React', 'WebSocket'],
       github: 'https://github.com',
       demo: 'https://demo.com',
-      featured: true
+      featured: false
     },
     {
-      id: 5,
+      id: 6,
       title: '数据可视化仪表盘',
       description: '实时监控和分析平台，提供直观的数据展示和报表功能',
       image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop',
@@ -64,7 +75,7 @@ const Projects = () => {
       featured: false
     },
     {
-      id: 6,
+      id: 7,
       title: '移动端社交应用',
       description: '跨平台移动社交应用，支持即时通讯、动态分享等功能',
       image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop',
@@ -79,7 +90,8 @@ const Projects = () => {
   const categories = [
     { key: 'all', label: '全部' },
     { key: 'frontend', label: '前端' },
-    { key: 'ai', label: 'AI' }
+    { key: 'ai', label: 'AI' },
+    { key: 'fullstack', label: '全栈' }
   ]
 
   const filteredProjects = projects.filter(project => {
