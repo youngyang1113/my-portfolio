@@ -1,7 +1,10 @@
 import { motion } from 'framer-motion'
 import { sectionRootVariants, sectionBlockVariants } from './data'
+import { useTheme } from '../../context/ThemeContext'
 
 export default function Section({ id, eyebrow, title, subtitle, children, className = '' }) {
+  const { theme } = useTheme()
+
   return (
     <motion.section
       id={id}
@@ -17,11 +20,11 @@ export default function Section({ id, eyebrow, title, subtitle, children, classN
             {eyebrow}
           </p>
         )}
-        <h2 className="text-3xl font-semibold tracking-tight text-white md:text-4xl lg:text-[2.5rem] lg:leading-tight">
+        <h2 className={`text-3xl font-semibold tracking-tight md:text-4xl lg:text-[2.5rem] lg:leading-tight ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
           {title}
         </h2>
         {subtitle && (
-          <p className="mt-4 max-w-2xl text-base leading-relaxed text-zinc-400 md:mt-5 md:text-lg md:leading-relaxed">
+          <p className={`mt-4 max-w-2xl text-base leading-relaxed md:mt-5 md:text-lg md:leading-relaxed ${theme === 'dark' ? 'text-zinc-400' : 'text-gray-500'}`}>
             {subtitle}
           </p>
         )}

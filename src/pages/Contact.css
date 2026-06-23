@@ -1,4 +1,4 @@
-/* 留言板高亮区域：淡色渐变 + 玻璃质感，突出评论区 */
+/* Guestbook Panel: glass morphism + glow */
 
 .contact-page {
   position: relative;
@@ -71,27 +71,58 @@
   position: relative;
 }
 
-/* 表单输入框聚焦时的发光效果 */
+/* Input focus glow */
 .guestbook-panel__comments input:focus,
 .guestbook-panel__comments textarea:focus {
   box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.1);
 }
 
-/* 滚动条美化 */
+/* Scrollbar */
 .guestbook-panel__comments ::-webkit-scrollbar {
   width: 6px;
 }
-
 .guestbook-panel__comments ::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.02);
   border-radius: 3px;
 }
-
 .guestbook-panel__comments ::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 3px;
 }
-
 .guestbook-panel__comments ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.2);
+}
+
+/* ── Light Mode ── */
+.light .guestbook-panel__inner {
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    0 8px 24px rgba(0, 0, 0, 0.03);
+}
+.light .guestbook-panel__inner:hover {
+  border-color: rgba(0, 0, 0, 0.1);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    0 12px 32px rgba(0, 0, 0, 0.06);
+}
+.light .guestbook-panel__glow {
+  background: radial-gradient(
+    ellipse 80% 60% at 50% 0%,
+    rgba(108, 99, 255, 0.04),
+    transparent 70%
+  );
+}
+.light .guestbook-panel__header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+.light .guestbook-panel__comments ::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.02);
+}
+.light .guestbook-panel__comments ::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
+}
+.light .guestbook-panel__comments ::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.2);
 }

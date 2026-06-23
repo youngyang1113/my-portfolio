@@ -1,53 +1,69 @@
 import { motion } from 'framer-motion'
-import { FiZap } from 'react-icons/fi'
-import { listItemReveal } from './data'
+import { easeOut, facts } from './data'
 import Section from './Section'
+import { useI18n } from '../../i18n/I18nContext'
+import { useTheme } from '../../context/ThemeContext'
 
 export default function IntroSection() {
+  const { t, lang } = useI18n()
+  const { theme } = useTheme()
+
   return (
-    <Section
-      id="intro"
-      eyebrow="简介"
-      title="我喜欢多做少说"
-      subtitle="更在意能否把一件事讲清楚、做出来、再迭代。"
-    >
-      <div className="grid gap-12 lg:grid-cols-[1fr_minmax(0,280px)] lg:gap-16">
+    <Section id="intro" eyebrow={t.about.introEyebrow} title={t.about.introTitle} subtitle={t.about.introSubtitle}>
+      <div className="grid gap-10 lg:grid-cols-5 lg:gap-16">
+        {/* 左侧：个人介绍 */}
         <motion.div
-          custom={0}
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
-          variants={listItemReveal}
-          className="space-y-6 text-base leading-relaxed text-zinc-400 md:text-[17px] md:leading-[1.75]"
+          transition={{ duration: 0.6, ease: easeOut }}
+          className={`space-y-5 lg:col-span-3 ${theme === 'dark' ? 'text-zinc-300' : 'text-gray-600'}`}
         >
-          <p>
-            我喜欢把想法落成可点击的页面、可复用的脚本，或一份结构清楚的数据结论。代码对我来说不只是课内作业，也是整理思路、对外表达的方式。
+          <p className="text-base leading-[1.8] md:text-[17px] md:leading-[1.8]">
+            {t.about.introP1}
           </p>
-          <p>
-            学习路径上我偏「问题导向」：缺什么补什么，边做边学。前端、Python、数据可视化都还在持续加深——不追求一次完美，更在意稳定进步。
+          <p className="text-base leading-[1.8] md:text-[17px] md:leading-[1.8]">
+            {t.about.introP2}
+          </p>
+          <p className={`text-base leading-[1.8] md:text-[17px] md:leading-[1.8] font-medium ${
+            theme === 'dark' ? 'text-zinc-200' : 'text-gray-800'
+          }`}>
+            {t.about.introP3}
           </p>
         </motion.div>
-        <motion.aside
-          custom={1}
-          initial="hidden"
-          whileInView="visible"
+
+        {/* 右侧：事实卡片 */}
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
-          variants={listItemReveal}
-          className="flex flex-col justify-between rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6 backdrop-blur-md"
+          transition={{ duration: 0.6, ease: easeOut, delay: 0.15 }}
+          className="lg:col-span-2 grid grid-cols-2 gap-3"
         >
-          <div>
-            <p className="font-mono text-sm uppercase tracking-[0.28em] text-zinc-400 md:text-base md:tracking-[0.32em]">
-              Focus
-            </p>
-            <p className="mt-3 text-base leading-relaxed text-zinc-300">
-              持续学习 · 把想法做成作品 · 在细节里找质感
-            </p>
-          </div>
-          <div className="mt-8 flex items-center gap-3 border-t border-white/[0.06] pt-6 text-zinc-500">
-            <FiZap className="shrink-0 text-primary/80" aria-hidden />
-            <span className="text-base">动手优先，文档与复盘跟上。</span>
-          </div>
-        </motion.aside>
+          {facts.map((fact, i) => (
+            <motion.div
+              key={fact.label}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, ease: easeOut, delay: 0.1 + i * 0.08 }}
+              whileHover={{ y: -2, transition: { duration: 0.2 } }}
+              className={`group rounded-xl border p-4 transition-colors ${
+                theme === 'dark'
+                  ? 'border-white/[0.06] bg-white/[0.02] hover:border-white/[0.12] hover:bg-white/[0.04]'
+                  : 'border-gray-200 bg-white hover:border-gray-300 shadow-sm'
+              }`}
+            >
+              <span className="text-2xl" role="img" aria-hidden>{fact.icon}</span>
+              <p className={`mt-2 text-sm font-medium ${theme === 'dark' ? 'text-zinc-200' : 'text-gray-800'}`}>
+                {lang === 'en' ? fact.labelEn : fact.label}
+              </p>
+              <p className={`mt-0.5 text-xs ${theme === 'dark' ? 'text-zinc-500' : 'text-gray-400'}`}>
+                {lang === 'en' ? fact.detailEn : fact.detail}
+              </p>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </Section>
   )

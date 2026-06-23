@@ -8,21 +8,42 @@
   }
 
   body {
-    @apply min-h-screen bg-dark text-gray-100 antialiased;
+    @apply min-h-screen antialiased transition-colors duration-500;
+    background: #09090b;
+    color: #f4f4f5;
   }
 
-  ::selection {
-    @apply bg-primary/40 text-white;
+  /* ── Light Mode ── */
+  .light body {
+    background: #faf9f7;
+    color: #1c1917;
   }
 }
 
-/* Hero 点阵网格 */
+/* ──────────────────────────────
+   Selection
+   ────────────────────────────── */
+::selection {
+  @apply bg-primary/30 text-white;
+}
+.light ::selection {
+  @apply bg-primary/20 text-gray-900;
+}
+
+/* ──────────────────────────────
+   Hero 点阵网格
+   ────────────────────────────── */
 .hero-grid {
   background-image: radial-gradient(circle, rgba(108, 99, 255, 0.15) 1px, transparent 1px);
   background-size: 32px 32px;
 }
+.light .hero-grid {
+  background-image: radial-gradient(circle, rgba(108, 99, 255, 0.08) 1px, transparent 1px);
+}
 
-/* 慢速旋转动画 */
+/* ──────────────────────────────
+   慢速旋转动画
+   ────────────────────────────── */
 @keyframes spin-slow {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
@@ -31,7 +52,9 @@
   animation: spin-slow 8s linear infinite;
 }
 
-/* 时间线节点脉冲动画 */
+/* ──────────────────────────────
+   时间线节点脉冲动画
+   ────────────────────────────── */
 @keyframes timeline-pulse {
   0%, 100% {
     transform: scale(1);
@@ -46,7 +69,9 @@
   animation: timeline-pulse 2.5s ease-in-out infinite;
 }
 
-/* 项目截图浏览器框架 */
+/* ──────────────────────────────
+   项目截图浏览器框架
+   ────────────────────────────── */
 .screenshot-frame {
   position: relative;
 }
@@ -71,4 +96,66 @@
   letter-spacing: 5px;
   color: rgba(255, 255, 255, 0.2);
   z-index: 6;
+}
+.light .screenshot-frame::before {
+  background: rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+.light .screenshot-frame::after {
+  color: rgba(0, 0, 0, 0.15);
+}
+
+/* ──────────────────────────────
+   Light mode: 柔和阴影 & 玻璃卡片
+   ────────────────────────────── */
+.light .glass-card {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    0 8px 24px rgba(0, 0, 0, 0.03);
+  backdrop-filter: blur(16px) saturate(1.2);
+}
+
+/* ──────────────────────────────
+   Light mode: 主色调文字用更深的变体
+   ────────────────────────────── */
+.light .text-primary {
+  color: #5550c8;
+}
+
+/* ──────────────────────────────
+   Light mode: 渐变文字保留但降低饱和度
+   ────────────────────────────── */
+.light .bg-gradient-to-r.from-primary.to-secondary {
+  background-image: linear-gradient(to right, #6C63FF, #FF6B6B);
+  opacity: 0.9;
+}
+
+/* ──────────────────────────────
+   Light mode: 按钮 & pill 样式增强
+   ────────────────────────────── */
+.light .gradient-btn {
+  box-shadow:
+    0 1px 2px rgba(108, 99, 255, 0.12),
+    0 4px 12px rgba(108, 99, 255, 0.08);
+}
+
+/* ──────────────────────────────
+   Light mode: scroll indicator
+   ────────────────────────────── */
+.light .scroll-indicator {
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+/* ──────────────────────────────
+   Guestbook panel — light mode overrides
+   ────────────────────────────── */
+.light .guestbook-panel__inner {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.03);
+}
+.light .guestbook-panel__glow {
+  background: linear-gradient(135deg, rgba(108, 99, 255, 0.04), rgba(255, 107, 107, 0.02));
 }

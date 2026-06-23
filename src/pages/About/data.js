@@ -2,9 +2,8 @@ import {
   FiLayout,
   FiGitBranch,
   FiDatabase,
-  FiLayers,
-  FiCode,
   FiCpu,
+  FiCode,
   FiTrendingUp,
 } from 'react-icons/fi'
 
@@ -35,65 +34,99 @@ export const listItemReveal = {
   }),
 }
 
-export const skills = [
-  { label: '前端与交互', icon: FiLayout, hint: 'React · 响应式 · 动效' },
-  { label: '工程化', icon: FiGitBranch, hint: 'Vite · 组件化 · 可维护结构' },
-  { label: '数据与脚本', icon: FiDatabase, hint: 'Python · 采集与分析' },
-  { label: '视觉与信息', icon: FiLayers, hint: '版式 · 数据可视化' },
-]
-
-export const projects = [
-  {
-    period: '2024',
-    title: '个人作品集站点',
-    summary: 'React + Vite 搭建，强调可读布局与轻量动效，作为长期迭代的展示入口。',
-    tags: ['React', 'Vite', 'Tailwind'],
-  },
-  {
-    period: '2023 — 2024',
-    title: '数据驱动的网页作品',
-    summary: '从整理数据到页面呈现，练习把复杂信息压缩成一眼能懂的层次。',
-    tags: ['Python', 'Web', '可视化'],
-  },
-  {
-    period: '课余',
-    title: '小型工具与实验页',
-    summary: '用短周期原型验证想法：表单、图表、交互状态——能跑、能改、能复用。',
-    tags: ['原型', 'UX'],
-  },
-]
-
+/* ── About Hero ── */
 export const resumeHref = `${import.meta.env.BASE_URL}resume.pdf`.replace(/\/{2,}/g, '/')
 
-export const growthTimeline = [
+/* ── Facts Cards ── */
+export const facts = [
+  { icon: '🎓', label: '计算机科学 · 本科在读', labelEn: 'CS · Undergraduate', detail: '陕西师范大学', detailEn: 'Shaanxi Normal University' },
+  { icon: '📍', label: '陕西·西安', labelEn: "Xi'an, Shaanxi", detail: '开放远程 / Onsite', detailEn: 'Open to Remote / Onsite' },
+  { icon: '🔧', label: '1年+ 前端实践', labelEn: '1yr+ Frontend Practice', detail: 'React 项目经验', detailEn: 'React project experience' },
+  { icon: '📄', label: '简历可下载', labelEn: 'Resume Available', detail: 'PDF / 在线预览', detailEn: 'PDF / Online Preview' },
+]
+
+/* ── Skill Categories ── */
+export const skillCategories = [
   {
-    period: ' 2005',
-    title: '出生',
-    place: '宁夏',
-    line: '在家乡成长，从小习惯把好奇拆成「能问出口的问题」和「能动手试的小步骤」。',
+    label: '前端与交互', labelEn: 'Frontend & Interaction',
+    icon: FiLayout,
+    tags: ['React', 'HTML5', 'CSS3', 'Tailwind', 'JavaScript', 'Framer Motion', 'Vite'],
+    level: '进阶', levelEn: 'Advanced',
+    percent: 80,
   },
   {
-    period: '2011 — 2020',
-    title: '我的小学和初中',
-    place: '宁夏',
-    line: '理科基础打牢，也开始认真思考长期方向：更想把时间花在能做出东西来的路径上。',
+    label: '工程化与工具', labelEn: 'Engineering & Tools',
+    icon: FiGitBranch,
+    tags: ['Git', 'npm', 'Vite', 'ESLint', 'Prettier', 'GitHub Pages'],
+    level: '熟练', levelEn: 'Proficient',
+    percent: 65,
   },
   {
-    period: '2020 — 2023',
-    title: '高中阶段',
-    place: '宁夏六盘山高级中学',
-    line: '担任校学生会社团理事长，组织发表过《六盘草》校刊，参与学生工作与活动组织，锻炼表达与协作；对「用技术解决问题」的兴趣变得更具体。',
+    label: '数据与脚本', labelEn: 'Data & Scripts',
+    icon: FiDatabase,
+    tags: ['Python', '爬虫', '数据分析', 'Pandas'],
+    level: '基础+', levelEn: 'Intermediate',
+    percent: 50,
   },
   {
-    period: '2023 — 至今',
-    title: '计算机科学与技术 · 本科在读',
-    place: '陕西师范大学',
-    line: '系统学习计算机基础；同时把更多时间花在动手做作品与自学前端、数据相关技术上。',
+    label: '正在学习', labelEn: 'Currently Learning',
+    icon: FiCpu,
+    tags: ['TypeScript', 'Node.js', '系统设计', '算法'],
+    level: '入门', levelEn: 'Beginner',
+    percent: 25,
+    isLearning: true,
   },
 ]
 
+/* ── Growth Timeline ── */
+export const growthTimeline = [
+  {
+    period: '2023.09',
+    title: '进入大学', titleEn: 'Started University',
+    place: '陕西师范大学', placeEn: 'Shaanxi Normal University',
+    line: '计算机科学与技术专业，系统学习 C/C++、数据结构、计算机网络基础，开始接触 Web 开发。',
+    lineEn: 'CS major. Studied C/C++, data structures, networking fundamentals. First exposure to web development.',
+  },
+  {
+    period: '2023.12',
+    title: '自学前端基础', titleEn: 'Self-taught Frontend Basics',
+    place: '自学', placeEn: 'Self-taught',
+    line: 'HTML + CSS + JavaScript 入门，做了第一个静态页面，感受到"代码变成页面"的乐趣。',
+    lineEn: 'HTML + CSS + JavaScript basics. Built first static page. Felt the joy of "code becoming a page".',
+  },
+  {
+    period: '2024.03',
+    title: '学习 React 生态', titleEn: 'Learning React Ecosystem',
+    place: '自学 + 项目', placeEn: 'Self-taught + Projects',
+    line: 'React + Vite + Tailwind CSS，完成第一个 SPA 项目，理解组件化和状态管理。',
+    lineEn: 'React + Vite + Tailwind CSS. First SPA project. Understood component architecture and state management.',
+  },
+  {
+    period: '2024.06',
+    title: '个人作品集上线', titleEn: 'Portfolio Launched',
+    place: '独立开发', placeEn: 'Independent',
+    line: '搭建并部署到 GitHub Pages，把项目、技能、成长经历整理成可浏览的展示入口。',
+    lineEn: 'Built and deployed to GitHub Pages. Organized projects, skills, and growth into a browsable showcase.',
+  },
+  {
+    period: '2024.09',
+    title: '数据相关实践', titleEn: 'Data-Related Practice',
+    place: '课程 + 自学', placeEn: 'Coursework + Self-taught',
+    line: 'Python 爬虫 + 数据可视化，尝试把后端数据展示在前端页面上。',
+    lineEn: 'Python scraping + data visualization. Bridging backend data with frontend presentation.',
+  },
+  {
+    period: '2025至今',
+    title: '持续迭代与扩展', titleEn: 'Continuous Iteration',
+    place: '独立', placeEn: 'Independent',
+    line: '完善作品集（i18n、PWA、深浅模式），探索 TypeScript 和 Node.js，寻找实习机会。',
+    lineEn: 'Enhancing portfolio (i18n, PWA, dark mode). Exploring TypeScript & Node.js. Looking for internships.',
+  },
+]
+
+/* ── Vision Items ── */
 export const visionItems = [
-  { icon: FiCode, text: '深化工程化与组件思维' },
-  { icon: FiCpu, text: '补齐计算机系统基础' },
-  { icon: FiTrendingUp, text: '用项目反推学习节奏' },
+  { icon: FiCode, text: '深化工程化与组件思维', textEn: 'Deepen engineering & component thinking' },
+  { icon: FiCpu, text: '补齐计算机系统基础', textEn: 'Strengthen CS systems foundations' },
+  { icon: FiTrendingUp, text: '用项目反推学习节奏', textEn: 'Let projects drive learning pace' },
 ]

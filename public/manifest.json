@@ -1,0 +1,25 @@
+{
+  "name": "杨渊博 - 个人作品集",
+  "short_name": "Rye Portfolio",
+  "description": "杨渊博的个人作品集网站。前端与数据可视化方向。",
+  "start_url": "/my-portfolio/",
+  "scope": "/my-portfolio/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#6C63FF",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/my-portfolio/personalpic.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/my-portfolio/personalpic.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ]
+}

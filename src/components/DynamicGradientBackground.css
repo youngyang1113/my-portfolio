@@ -221,6 +221,28 @@
   pointer-events: none;
 }
 
+/* ── Light mode ── */
+.dg-root--light {
+  background: #faf9f7;
+}
+.dg-root--light .dg-base,
+.dg-root--light .dg-flow,
+.dg-root--light .dg-orb,
+.dg-root--light .dg-glass,
+.dg-root--light .dg-grain,
+.dg-root--light .dg-vignette {
+  opacity: 0 !important;
+}
+.dg-light-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 120% 60% at 50% 0%, rgba(108, 99, 255, 0.03) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 40% at 80% 100%, rgba(255, 107, 107, 0.02) 0%, transparent 50%),
+    linear-gradient(180deg, #faf9f7 0%, #f5f3ef 100%);
+  pointer-events: none;
+}
+
 @media (max-width: 768px) {
   .dg-flow--c,
   .dg-orb--3 {

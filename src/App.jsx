@@ -6,6 +6,9 @@ import DynamicGradientBackground from './components/DynamicGradientBackground'
 import ParticleBackground from './components/ParticleBackground'
 import LoadingScreen from './components/LoadingScreen'
 import ScrollProgressBar from './components/ScrollProgressBar'
+import ErrorBoundary from './components/ErrorBoundary'
+import { ThemeProvider } from './context/ThemeContext'
+import { I18nProvider } from './i18n/I18nContext'
 import './App.css'
 
 const Home = lazy(() => import('./pages/Home'))
@@ -37,6 +40,9 @@ export default function App() {
 
   return (
     <div className="app">
+      <ErrorBoundary>
+      <ThemeProvider>
+      <I18nProvider>
       <DynamicGradientBackground />
       <ParticleBackground />
       <AnimatePresence mode="wait">
@@ -96,6 +102,9 @@ export default function App() {
           </motion.div>
         )}
       </AnimatePresence>
+      </I18nProvider>
+      </ThemeProvider>
+      </ErrorBoundary>
     </div>
   )
 }

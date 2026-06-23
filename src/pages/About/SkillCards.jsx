@@ -1,126 +1,111 @@
 import { motion } from 'framer-motion'
-import { skills, listItemReveal } from './data'
+import { easeOut, skillCategories } from './data'
 import Section from './Section'
-
-/* 技能熟练度百分比 — 与 skills 数组顺序对应 */
-const proficiency = [85, 75, 70, 72]
+import { useI18n } from '../../i18n/I18nContext'
+import { useTheme } from '../../context/ThemeContext'
 
 export default function SkillCards() {
+  const { t, lang } = useI18n()
+  const { theme } = useTheme()
+
   return (
-    <Section
-      id="skills"
-      eyebrow="核心技能"
-      title="能力地图，用卡片收束。"
-      subtitle="每项都是正在加深的方向。"
-    >
-      <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {skills.map((s, idx) => {
-          const pct = proficiency[idx] || 70
-          const circumference = 2 * Math.PI * 22 // r=22
-          const dashOffset = circumference - (pct / 100) * circumference
+    <Section id="skills" eyebrow={t.about.skillsEyebrow} title={t.about.skillsTitle} subtitle={t.about.skillsSubtitle}>
+      <div className="grid gap-5 sm:grid-cols-2">
+        {skillCategories.map((cat, i) => (
+          <motion.div
+            key={cat.label}
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.55, ease: easeOut, delay: i * 0.1 }}
+            whileHover={{ y: -3, transition: { duration: 0.22 } }}
+            className={`group relative overflow-hidden rounded-2xl border p-6 transition-all ${
+              cat.isLearning
+                ? theme === 'dark'
+                  ? 'border-dashed border-primary/30 bg-primary/[0.03]'
+                  : 'border-dashed border-primary/30 bg-primary/[0.02]'
+                : theme === 'dark'
+                  ? 'border-white/[0.06] bg-white/[0.02] hover:border-white/[0.12]'
+                  : 'border-gray-200 bg-white hover:border-gray-300 shadow-sm'
+            }`}
+          >
+            {/* Header */}
+            <div className="mb-4 flex items-center gap-3">
+              <div className={`flex h-9 w-9 items-center justify-center rounded-lg ${
+                cat.isLearning
+                  ? 'bg-primary/15 text-primary'
+                  : theme === 'dark'
+                    ? 'bg-white/[0.06] text-zinc-400'
+                    : 'bg-gray-100 text-gray-500'
+              }`}>
+                <cat.icon size={18} aria-hidden />
+              </div>
+              <div className="flex-1">
+                <h3 className={`text-sm font-semibold ${theme === 'dark' ? 'text-zinc-200' : 'text-gray-800'}`}>
+                  {lang === 'en' ? cat.labelEn : cat.label}
+                </h3>
+                <span className={`text-xs ${
+                  cat.isLearning ? 'text-primary' : theme === 'dark' ? 'text-zinc-500' : 'text-gray-400'
+                }`}>
+                  {cat.isLearning
+                    ? (lang === 'en' ? t.about.skillLearning : t.about.skillLearning)
+                    : (lang === 'en' ? cat.levelEn : cat.level)
+                  }
+                </span>
+              </div>
+            </div>
 
-          return (
-            <motion.li
-              key={s.label}
-              className="will-change-transform"
-              custom={idx}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.25, margin: '0px 0px -8% 0px' }}
-              variants={listItemReveal}
-            >
-              <motion.div
-                whileHover={{ y: -6 }}
-                transition={{ type: 'spring', stiffness: 420, damping: 28 }}
-                className="group relative h-full rounded-2xl border border-white/[0.08] bg-white/[0.025] p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.02)_inset] backdrop-blur-sm transition-all duration-300 hover:border-primary/25 hover:shadow-[0_8px_30px_-12px_rgba(108,99,255,0.2)]"
-              >
-                {/* 鼠标追光 */}
-                <div
-                  className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                  style={{
-                    background:
-                      'radial-gradient(600px circle at var(--mx,50%) var(--my,0%), rgba(108,99,255,0.12), transparent 40%)',
-                  }}
-                  onMouseMove={(e) => {
-                    const el = e.currentTarget.parentElement
-                    if (!el) return
-                    const r = el.getBoundingClientRect()
-                    el.style.setProperty('--mx', `${e.clientX - r.left}px`)
-                    el.style.setProperty('--my', `${e.clientY - r.top}px`)
-                  }}
-                  aria-hidden
+            {/* Tag Cloud */}
+            <div className="flex flex-wrap gap-2">
+              {cat.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className={`rounded-md px-2.5 py-1 text-xs font-medium transition-colors ${
+                    cat.isLearning
+                      ? theme === 'dark'
+                        ? 'bg-primary/10 text-primary/80'
+                        : 'bg-primary/10 text-primary'
+                      : theme === 'dark'
+                        ? 'bg-white/[0.05] text-zinc-400 group-hover:bg-white/[0.08]'
+                        : 'bg-gray-100 text-gray-600 group-hover:bg-gray-200'
+                  }`}
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+
+            {/* Progress bar */}
+            <div className="mt-5">
+              <div className={`h-1.5 w-full overflow-hidden rounded-full ${
+                theme === 'dark' ? 'bg-white/[0.06]' : 'bg-gray-100'
+              }`}>
+                <motion.div
+                  className={`h-full rounded-full ${
+                    cat.isLearning
+                      ? 'bg-gradient-to-r from-primary/60 to-primary/40'
+                      : 'bg-gradient-to-r from-primary to-secondary'
+                  }`}
+                  initial={{ width: 0 }}
+                  whileInView={{ width: `${cat.percent}%` }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1.2, ease: easeOut, delay: 0.3 + i * 0.1 }}
                 />
+              </div>
+            </div>
 
-                <div className="relative flex items-start justify-between">
-                  {/* 图标 */}
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors duration-300 group-hover:bg-primary/20 group-hover:text-primary">
-                    <s.icon className="text-xl" />
-                  </div>
-
-                  {/* 熟练度环 */}
-                  <svg
-                    className="h-12 w-12 -rotate-90"
-                    viewBox="0 0 48 48"
-                    aria-label={`${s.label} 熟练度 ${pct}%`}
-                  >
-                    <circle
-                      cx="24"
-                      cy="24"
-                      r="22"
-                      fill="none"
-                      stroke="rgba(255,255,255,0.06)"
-                      strokeWidth="3"
-                    />
-                    <motion.circle
-                      cx="24"
-                      cy="24"
-                      r="22"
-                      fill="none"
-                      stroke="url(#skill-gradient)"
-                      strokeWidth="3"
-                      strokeLinecap="round"
-                      strokeDasharray={circumference}
-                      initial={{ strokeDashoffset: circumference }}
-                      whileInView={{ strokeDashoffset: dashOffset }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: idx * 0.15 }}
-                    />
-                    <defs>
-                      <linearGradient id="skill-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#6C63FF" />
-                        <stop offset="100%" stopColor="#FF6B6B" />
-                      </linearGradient>
-                    </defs>
-                    <text
-                      x="24"
-                      y="26"
-                      textAnchor="middle"
-                      className="fill-white text-[10px] font-medium"
-                      style={{ transform: 'rotate(90deg)', transformOrigin: 'center' }}
-                    >
-                      {pct}%
-                    </text>
-                  </svg>
-                </div>
-
-                <p className="relative mt-5 font-medium text-white">{s.label}</p>
-                <p className="relative mt-2 text-base text-zinc-500">{s.hint}</p>
-
-                {/* 底部渐变装饰条 */}
-                <div className="relative mt-5 h-1 w-full overflow-hidden rounded-full bg-white/[0.06]">
-                  <motion.div
-                    className="h-full rounded-full bg-gradient-to-r from-primary to-secondary"
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${pct}%` }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: idx * 0.15 + 0.3 }}
-                  />
-                </div>
-              </motion.div>
-            </motion.li>
-          )
-        })}
-      </ul>
+            {/* Learning badge */}
+            {cat.isLearning && (
+              <div className="pointer-events-none absolute right-4 top-4">
+                <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-semibold text-primary">
+                  <span className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
+                  {lang === 'en' ? 'Learning' : '学习中'}
+                </span>
+              </div>
+            )}
+          </motion.div>
+        ))}
+      </div>
     </Section>
   )
 }
